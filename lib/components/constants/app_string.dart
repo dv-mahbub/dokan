@@ -35,6 +35,8 @@ class IconPaths {
         return '$_basePath/person.png';
       case AppIcons.search:
         return '$_basePath/search.png';
+      case AppIcons.camera:
+        return '$_basePath/camera.png';
       default:
         return '';
     }

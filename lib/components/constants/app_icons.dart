@@ -11,5 +11,6 @@ enum AppIcons {
   notification,
   password,
   person,
-  search;
+  search,
+  camera;
 }
