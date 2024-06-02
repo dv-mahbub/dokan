@@ -36,12 +36,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 profilePicture(),
-                Gap(40),
+                const Gap(35),
                 CustomField(
                     hintText: 'Name',
                     prefixIcon: const AppIcon(AppIcons.email),
                     controller: nameController),
-                Gap(20),
+                const Gap(20),
                 CustomField(
                     hintText: 'Email',
                     prefixIcon: const AppIcon(AppIcons.email),
@@ -58,9 +58,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   controller: confirmPasswordController,
                   prefixIcon: const AppIcon(AppIcons.password),
                 ),
-                Gap(55),
+                const Gap(45),
                 CustomButton(text: 'Sign Up', onTap: () {}),
-                Gap(30),
+                const Gap(30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -106,14 +106,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
   }
 
-  InkWell profilePicture() {
+  Widget profilePicture() {
     return InkWell(
       child: Stack(
         children: [
           Container(
             height: 121,
             width: 121,
-            padding: EdgeInsets.all(40),
+            padding: const EdgeInsets.all(40),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: AppColors.whiteBg,
@@ -136,7 +136,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             child: Container(
               height: 30,
               width: 30,
-              padding: EdgeInsets.all(6),
+              padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
                   shape: BoxShape.circle, color: AppColors.primary),
               child: AppIcon(
