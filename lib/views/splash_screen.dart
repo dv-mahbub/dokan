@@ -3,6 +3,7 @@ import 'package:dokan/components/constants/app_string.dart';
 import 'package:dokan/components/global_functions/navigate.dart';
 import 'package:dokan/views/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -43,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: isExpanded ? 150 : 70,
               width: isExpanded ? 150 : 70,
               curve: Curves.bounceOut,
-              child: Image.asset(
+              child: SvgPicture.asset(
                 AppImages.logo,
                 fit: BoxFit.contain,
               ),

@@ -161,7 +161,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
       ),
       child: AppIcon(
         appIcon,
-        isOriginalColor: true,
       ),
     );
   }

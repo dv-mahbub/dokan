@@ -1,7 +1,7 @@
 import 'package:dokan/components/constants/app_icons.dart';
 
 class AppImages {
-  static String logo = 'assets/images/logo.png';
+  static String logo = 'assets/images/logo.svg';
 }
 
 class IconPaths {
@@ -10,33 +10,33 @@ class IconPaths {
   static String getPath(AppIcons icon) {
     switch (icon) {
       case AppIcons.cart:
-        return '$_basePath/cart.png';
+        return '$_basePath/cart.svg';
       case AppIcons.dashboard:
-        return '$_basePath/dashboard.png';
+        return '$_basePath/dashboard.svg';
       case AppIcons.email:
-        return '$_basePath/email.png';
+        return '$_basePath/email.svg';
       case AppIcons.facebook:
-        return '$_basePath/facebook.png';
+        return '$_basePath/facebook.svg';
       case AppIcons.filter:
-        return '$_basePath/filter.png';
+        return '$_basePath/filter.svg';
       case AppIcons.google:
-        return '$_basePath/google.png';
+        return '$_basePath/google.svg';
       case AppIcons.hamburger:
-        return '$_basePath/hamburger.png';
+        return '$_basePath/hamburger.svg';
       case AppIcons.heart:
-        return '$_basePath/heart.png';
+        return '$_basePath/heart.svg';
       case AppIcons.home:
-        return '$_basePath/home.png';
+        return '$_basePath/home.svg';
       case AppIcons.notification:
-        return '$_basePath/notification.png';
+        return '$_basePath/notification.svg';
       case AppIcons.password:
-        return '$_basePath/password.png';
+        return '$_basePath/password.svg';
       case AppIcons.person:
-        return '$_basePath/person.png';
+        return '$_basePath/person.svg';
       case AppIcons.search:
-        return '$_basePath/search.png';
+        return '$_basePath/search.svg';
       case AppIcons.camera:
-        return '$_basePath/camera.png';
+        return '$_basePath/camera.svg';
       default:
         return '';
     }

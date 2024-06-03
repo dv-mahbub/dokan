@@ -8,6 +8,7 @@ import 'package:dokan/components/global_widget/custom_icon.dart';
 import 'package:dokan/main.dart';
 import 'package:dokan/views/registration_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 class LoginPage extends StatefulWidget {
@@ -32,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset(
+                SvgPicture.asset(
                   AppImages.logo,
                   width: 150,
                   fit: BoxFit.fitWidth,
@@ -110,7 +111,6 @@ class _LoginPageState extends State<LoginPage> {
       ),
       child: AppIcon(
         appIcon,
-        isOriginalColor: true,
       ),
     );
   }
