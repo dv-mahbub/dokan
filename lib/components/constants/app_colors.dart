@@ -9,5 +9,6 @@ class AppColors {
   static Color blackText = Colors.black;
   static Color blueText = const Color(0xff2893E3);
   static Color grey = const Color(0xff7C8592);
+  static Color greyText = const Color(0xff989FA8);
   static Color redBg = Colors.red;
 }

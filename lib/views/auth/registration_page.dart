@@ -5,7 +5,8 @@ import 'package:dokan/components/global_widget/custom_button.dart';
 import 'package:dokan/components/global_widget/custom_field.dart';
 import 'package:dokan/components/global_widget/custom_icon.dart';
 import 'package:dokan/main.dart';
-import 'package:dokan/views/login_page.dart';
+import 'package:dokan/views/auth/login_page.dart';
+import 'package:dokan/views/homepage.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -59,14 +60,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   prefixIcon: const AppIcon(AppIcons.password),
                 ),
                 const Gap(45),
-                CustomButton(text: 'Sign Up', onTap: () {}),
+                CustomButton(
+                    text: 'Sign Up',
+                    onTap: () {
+                      if (mounted) {
+                        navigate(context: context, child: const Homepage());
+                      }
+                    }),
                 const Gap(30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     socialLoginContainer(appIcon: AppIcons.facebook),
                     const Gap(8),
-                    socialLoginContainer(appIcon: AppIcons.google),
+                    socialLoginContainer(appIcon: AppIcons.search),
                   ],
                 ),
                 const Gap(35),
