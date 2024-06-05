@@ -1,9 +1,9 @@
 import 'package:dokan/components/constants/app_colors.dart';
 import 'package:dokan/components/constants/app_icons.dart';
 import 'package:dokan/components/global_widget/custom_icon.dart';
-import 'package:dokan/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 class Homepage extends StatefulWidget {
@@ -162,7 +162,7 @@ Widget homeBody(int index) {
                 child: Column(
                   children: [
                     SizedBox(
-                      width: screenWidth,
+                      width: 1.sw,
                       child: Wrap(
                         alignment: WrapAlignment.center,
                         spacing: 10,
@@ -201,8 +201,7 @@ Widget homeBody(int index) {
 
 Container productContainer() {
   return Container(
-    width: screenWidth * .43,
-    height: screenWidth * .77,
+    width: ScreenUtil().screenWidth < 600 ? .43.sw : .28.sw,
     padding: EdgeInsets.zero,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(15),
@@ -211,7 +210,7 @@ Container productContainer() {
         BoxShadow(
           blurRadius: 6,
           color: AppColors.shadowColor.withOpacity(.13),
-          offset: Offset(2, 3),
+          offset: const Offset(2, 3),
         )
       ],
     ),
@@ -222,10 +221,11 @@ Container productContainer() {
         children: [
           Image.asset(
             'assets/images/Bitmap.png',
-            width: screenWidth * .43,
+            width: ScreenUtil().screenWidth < 600 ? .43.sw : .28.sw,
             fit: BoxFit.fitWidth,
           ),
-          Expanded(
+          SizedBox(
+            height: 120,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -270,6 +270,7 @@ Container productContainer() {
                   ),
                   onRatingUpdate: (rating) {},
                 ),
+                Gap(5),
               ],
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:dokan/components/constants/app_colors.dart';
 import 'package:dokan/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomField extends StatefulWidget {
   final String? label;
@@ -52,7 +53,7 @@ class _CustomFieldState extends State<CustomField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.width ?? screenWidth * .82,
+      width: widget.width ?? .82.sw,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(

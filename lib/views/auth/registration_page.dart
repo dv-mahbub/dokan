@@ -9,6 +9,7 @@ import 'package:dokan/views/auth/login_page.dart';
 import 'package:dokan/views/homepage.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -29,84 +30,81 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: SizedBox(
-            height: screenHeight,
-            width: screenWidth,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                profilePicture(),
-                const Gap(35),
-                CustomField(
-                    hintText: 'Name',
-                    prefixIcon: const AppIcon(AppIcons.email),
-                    controller: nameController),
-                const Gap(20),
-                CustomField(
-                    hintText: 'Email',
-                    prefixIcon: const AppIcon(AppIcons.email),
-                    controller: emailController),
-                const Gap(20),
-                CustomField(
-                  hintText: 'Password',
-                  controller: passwordController,
-                  prefixIcon: const AppIcon(AppIcons.password),
-                ),
-                const Gap(20),
-                CustomField(
-                  hintText: 'Confirm Password',
-                  controller: confirmPasswordController,
-                  prefixIcon: const AppIcon(AppIcons.password),
-                ),
-                const Gap(45),
-                CustomButton(
-                    text: 'Sign Up',
-                    onTap: () {
-                      if (mounted) {
-                        navigate(context: context, child: const Homepage());
-                      }
-                    }),
-                const Gap(30),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Gap(10),
+              profilePicture(),
+              const Gap(35),
+              CustomField(
+                  hintText: 'Name',
+                  prefixIcon: const AppIcon(AppIcons.email),
+                  controller: nameController),
+              const Gap(20),
+              CustomField(
+                  hintText: 'Email',
+                  prefixIcon: const AppIcon(AppIcons.email),
+                  controller: emailController),
+              const Gap(20),
+              CustomField(
+                hintText: 'Password',
+                controller: passwordController,
+                prefixIcon: const AppIcon(AppIcons.password),
+              ),
+              const Gap(20),
+              CustomField(
+                hintText: 'Confirm Password',
+                controller: confirmPasswordController,
+                prefixIcon: const AppIcon(AppIcons.password),
+              ),
+              const Gap(45),
+              CustomButton(
+                  text: 'Sign Up',
+                  onTap: () {
+                    if (mounted) {
+                      navigate(context: context, child: const Homepage());
+                    }
+                  }),
+              const Gap(30),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  socialLoginContainer(appIcon: AppIcons.facebook),
+                  const Gap(8),
+                  socialLoginContainer(appIcon: AppIcons.search),
+                ],
+              ),
+              const Gap(35),
+              RichText(
+                text: TextSpan(
                   children: [
-                    socialLoginContainer(appIcon: AppIcons.facebook),
-                    const Gap(8),
-                    socialLoginContainer(appIcon: AppIcons.search),
+                    TextSpan(
+                      text: 'Already have an account? ',
+                      style: TextStyle(
+                        color: AppColors.blackText,
+                        fontSize: 17,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'Login',
+                      style: TextStyle(
+                        color: AppColors.blueText,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          if (mounted) {
+                            navigate(
+                                context: context, child: const LoginPage());
+                          }
+                        },
+                    ),
                   ],
                 ),
-                const Gap(35),
-                RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'Already have an account? ',
-                        style: TextStyle(
-                          color: AppColors.blackText,
-                          fontSize: 17,
-                        ),
-                      ),
-                      TextSpan(
-                        text: 'Login',
-                        style: TextStyle(
-                          color: AppColors.blueText,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            if (mounted) {
-                              navigate(
-                                  context: context, child: const LoginPage());
-                            }
-                          },
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           ),
         ),
       ),

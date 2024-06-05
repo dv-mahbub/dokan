@@ -1,6 +1,6 @@
 import 'package:dokan/components/constants/app_colors.dart';
-import 'package:dokan/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -24,7 +24,7 @@ class CustomButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: height ?? 61,
-        width: width ?? screenWidth * .82,
+        width: width ?? .82.sw,
         decoration: BoxDecoration(
           color: backgroundColor ?? AppColors.primary,
           borderRadius: BorderRadius.circular(7),

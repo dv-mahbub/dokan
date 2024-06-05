@@ -9,6 +9,7 @@ import 'package:dokan/main.dart';
 import 'package:dokan/views/auth/registration_page.dart';
 import 'package:dokan/views/homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
@@ -64,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(color: AppColors.grey, fontSize: 13),
                     ),
                   ),
-                  Gap(screenWidth * .07),
+                  Gap(.07.sw),
                 ],
               ),
               const Gap(25),
