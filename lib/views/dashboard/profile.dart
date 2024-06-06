@@ -69,6 +69,12 @@ class _ProfileState extends State<Profile> {
               ),
               const Gap(40),
               optionsList(),
+              const Gap(30),
+              CustomButton(
+                text: 'Log Out',
+                onTap: () {},
+                width: .88.sw,
+              ),
               const Gap(35),
             ],
           ),
@@ -231,10 +237,12 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             const Spacer(),
-            const Icon(
-              Icons.keyboard_arrow_right,
+            Icon(
+              isExpanded
+                  ? Icons.keyboard_arrow_down
+                  : Icons.keyboard_arrow_right,
               // size: 12,
-              color: Color(0xff899AA2),
+              color: const Color(0xff899AA2),
             ),
           ],
         ),
