@@ -7,8 +7,10 @@ class CustomButton extends StatelessWidget {
   final IconData? icon;
   final Function() onTap;
   final double? height;
+  final Color? textColor;
   final Color? backgroundColor;
   final double? width;
+  final bool? isBorderNeeded;
   const CustomButton(
       {super.key,
       required this.text,
@@ -16,7 +18,9 @@ class CustomButton extends StatelessWidget {
       this.icon,
       this.width,
       this.height,
-      this.backgroundColor});
+      this.backgroundColor,
+      this.isBorderNeeded,
+      this.textColor});
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +32,12 @@ class CustomButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: backgroundColor ?? AppColors.primary,
           borderRadius: BorderRadius.circular(7),
+          border: isBorderNeeded != null && isBorderNeeded!
+              ? Border.all(
+                  color: Color(0xff979797).withOpacity(.6),
+                  width: 1,
+                )
+              : null,
         ),
         child: Center(
           child: icon != null
@@ -37,10 +47,10 @@ class CustomButton extends StatelessWidget {
                 )
               : Text(
                   text,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
-                  ),
+                  style: TextStyle(
+                      color: textColor ?? Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w700),
                   maxLines: 1,
                   softWrap: true,
                 ),

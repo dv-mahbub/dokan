@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dokan/components/constants/app_colors.dart';
 import 'package:dokan/components/constants/app_icons.dart';
+import 'package:dokan/components/constants/app_string.dart';
 import 'package:dokan/components/global_widget/custom_bottom_sheet.dart';
 import 'package:dokan/components/global_widget/custom_icon.dart';
 import 'package:flutter/material.dart';
@@ -163,7 +164,7 @@ class _ProductListState extends State<ProductList> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Image.asset(
-              'assets/images/Bitmap.png',
+              DemoImage.person,
               width: ScreenUtil().screenWidth < 600 ? .43.sw : .28.sw,
               fit: BoxFit.fitWidth,
             ),

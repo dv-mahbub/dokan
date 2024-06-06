@@ -5,6 +5,7 @@ import 'package:dokan/components/constants/app_icons.dart';
 import 'package:dokan/components/global_widget/custom_bottom_sheet.dart';
 import 'package:dokan/components/global_widget/custom_icon.dart';
 import 'package:dokan/views/dashboard/product_list.dart';
+import 'package:dokan/views/dashboard/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -164,9 +165,7 @@ class _HomepageState extends State<Homepage> {
           child: Text('Cart'),
         );
       default:
-        return Center(
-          child: Text('Profile'),
-        );
+        return const Profile();
     }
   }
 }

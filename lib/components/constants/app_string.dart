@@ -4,6 +4,10 @@ class AppImages {
   static String logo = 'assets/images/logo.svg';
 }
 
+class DemoImage {
+  static String person = 'assets/images/Bitmap.png';
+}
+
 class IconPaths {
   static const String _basePath = 'assets/icons';
 
