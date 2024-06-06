@@ -6,7 +6,6 @@ import 'package:dokan/components/global_widget/custom_field.dart';
 import 'package:dokan/components/global_widget/custom_icon.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -46,29 +45,31 @@ class _ProfileState extends State<Profile> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Gap(20),
-              Text(
+              const Gap(20),
+              const Text(
                 'My Account',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
               ),
-              Gap(35),
+              const Gap(35),
               profilePicture(),
-              Gap(40),
+              const Gap(40),
               Text(
                 'Name of the person',
                 style: GoogleFonts.lato(
-                  textStyle:
-                      TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
+                  textStyle: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.w900),
                 ),
               ),
               Text(
                 'email@mail.com',
                 style: GoogleFonts.lato(
-                  textStyle: TextStyle(fontSize: 15, color: Color(0xff535353)),
+                  textStyle:
+                      const TextStyle(fontSize: 15, color: Color(0xff535353)),
                 ),
               ),
-              Gap(40),
+              const Gap(40),
               optionsList(),
+              const Gap(35),
             ],
           ),
         ),
@@ -79,13 +80,13 @@ class _ProfileState extends State<Profile> {
   Container optionsList() {
     return Container(
       width: .88.sw,
-      padding: EdgeInsets.symmetric(horizontal: 22),
+      padding: const EdgeInsets.symmetric(horizontal: 22),
       decoration: BoxDecoration(
         color: AppColors.whiteBg,
         borderRadius: BorderRadius.circular(10),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
-            color: Color(0xff4D587721),
+            color: Color(0xff587721),
             blurRadius: 6,
             offset: Offset(2, 3),
           ),
@@ -93,7 +94,7 @@ class _ProfileState extends State<Profile> {
       ),
       child: Column(
         children: [
-          Gap(15),
+          const Gap(15),
           optionContainer(
               text: 'Account',
               appIcons: AppIcons.person,
@@ -132,7 +133,7 @@ class _ProfileState extends State<Profile> {
                       hint: '77017',
                       inputFieldWidth: 100,
                       controller: zipCodeController),
-                  Gap(30),
+                  const Gap(30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -148,28 +149,28 @@ class _ProfileState extends State<Profile> {
                         text: 'Save',
                         onTap: () {},
                         width: .34.sw,
-                        backgroundColor: Color(0xff1ABC9C),
+                        backgroundColor: const Color(0xff1ABC9C),
                       ),
                     ],
                   ),
-                  Gap(30),
+                  const Gap(30),
                 ],
               )),
-          Divider(),
+          const Divider(),
           optionContainer(
               text: 'Password', appIcons: AppIcons.password, onTap: () {}),
-          Divider(),
+          const Divider(),
           optionContainer(
               text: 'Notification',
               appIcons: AppIcons.notification,
               onTap: () {}),
-          Divider(),
+          const Divider(),
           optionContainer(
               text: 'Wishlist',
               appIcons: AppIcons.heart,
               onTap: () {},
               additionalText: '(00)'),
-          Gap(7),
+          const Gap(7),
         ],
       ),
     );
@@ -183,15 +184,15 @@ class _ProfileState extends State<Profile> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Gap(13),
+        const Gap(13),
         Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             color: Color(0xff263238),
           ),
         ),
-        Gap(7),
+        const Gap(7),
         CustomField(
           hintText: hint,
           width: inputFieldWidth,
@@ -217,10 +218,10 @@ class _ProfileState extends State<Profile> {
               appIcons,
               size: 17,
             ),
-            Gap(15),
+            const Gap(15),
             Text(
               text,
-              style: TextStyle(fontSize: 17),
+              style: const TextStyle(fontSize: 17),
             ),
             Visibility(
               visible: additionalText != null,
@@ -229,8 +230,8 @@ class _ProfileState extends State<Profile> {
                 style: TextStyle(fontSize: 17, color: AppColors.greyText),
               ),
             ),
-            Spacer(),
-            Icon(
+            const Spacer(),
+            const Icon(
               Icons.keyboard_arrow_right,
               // size: 12,
               color: Color(0xff899AA2),

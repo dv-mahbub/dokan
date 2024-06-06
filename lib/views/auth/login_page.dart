@@ -5,7 +5,6 @@ import 'package:dokan/components/global_functions/navigate.dart';
 import 'package:dokan/components/global_widget/custom_button.dart';
 import 'package:dokan/components/global_widget/custom_field.dart';
 import 'package:dokan/components/global_widget/custom_icon.dart';
-import 'package:dokan/main.dart';
 import 'package:dokan/views/auth/registration_page.dart';
 import 'package:dokan/views/dashboard/homepage.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Gap(55),
+              const Gap(55),
               SvgPicture.asset(
                 AppImages.logo,
                 width: 150,

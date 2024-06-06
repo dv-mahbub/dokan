@@ -2,15 +2,11 @@ import 'dart:developer';
 
 import 'package:dokan/components/constants/app_colors.dart';
 import 'package:dokan/components/constants/app_icons.dart';
-import 'package:dokan/components/global_widget/custom_bottom_sheet.dart';
 import 'package:dokan/components/global_widget/custom_icon.dart';
 import 'package:dokan/views/dashboard/product_list.dart';
 import 'package:dokan/views/dashboard/profile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -71,7 +67,7 @@ class _HomepageState extends State<Homepage> {
               }
             },
           ),
-          SizedBox(width: 48), // Spacer for the FAB
+          const Gap(48),
           IconButton(
             icon: AppIcon(
               AppIcons.cart,
@@ -111,7 +107,7 @@ class _HomepageState extends State<Homepage> {
       width: 56,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           colors: [
             Color(0xFFFF679B),
             Color(0xFFFF7B51),
@@ -121,14 +117,14 @@ class _HomepageState extends State<Homepage> {
         ),
         boxShadow: [
           BoxShadow(
-            color: Color(0xFFB82D48).withOpacity(0.15),
-            offset: Offset(0, 12),
+            color: const Color(0xFFB82D48).withOpacity(0.15),
+            offset: const Offset(0, 12),
             blurRadius: 28,
           ),
         ],
       ),
       child: RawMaterialButton(
-        shape: CircleBorder(),
+        shape: const CircleBorder(),
         onPressed: () {
           if (mounted) {
             setState(
@@ -153,15 +149,15 @@ class _HomepageState extends State<Homepage> {
       case 0:
         return const ProductList();
       case 1:
-        return Center(
+        return const Center(
           child: Text('Dashboard'),
         );
       case 2:
-        return Center(
+        return const Center(
           child: Text('Search'),
         );
       case 3:
-        return Center(
+        return const Center(
           child: Text('Cart'),
         );
       default:

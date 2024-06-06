@@ -27,7 +27,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
       builder: (BuildContext context, StateSetter setState) {
         return Column(
           children: [
-            Gap(20),
+            const Gap(20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -38,8 +38,8 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
                 ),
               ],
             ),
-            Gap(20),
-            Text(
+            const Gap(20),
+            const Text(
               'Filter',
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
             ),
@@ -69,7 +69,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
             }),
         Text(
           text,
-          style: TextStyle(fontSize: 15),
+          style: const TextStyle(fontSize: 15),
         )
       ],
     );

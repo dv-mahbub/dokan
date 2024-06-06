@@ -27,19 +27,19 @@ class _ProductListState extends State<ProductList> {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 3),
+            padding: const EdgeInsets.symmetric(vertical: 3),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Gap(40),
-                Text(
+                const Gap(40),
+                const Text(
                   'Product List',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
                 ),
                 IconButton(
-                  padding: EdgeInsets.only(right: 25),
+                  padding: const EdgeInsets.only(right: 25),
                   onPressed: () {},
-                  icon: SizedBox(
+                  icon: const SizedBox(
                     height: 25,
                     width: 25,
                     child: AppIcon(AppIcons.search),
@@ -68,12 +68,12 @@ class _ProductListState extends State<ProductList> {
               ),
               child: Row(
                 children: [
-                  Gap(15),
-                  AppIcon(
+                  const Gap(15),
+                  const AppIcon(
                     AppIcons.filter,
                     size: 20,
                   ),
-                  Gap(10),
+                  const Gap(10),
                   Text(
                     'Filter',
                     style: GoogleFonts.lato(
@@ -83,7 +83,7 @@ class _ProductListState extends State<ProductList> {
                           color: AppColors.greyText),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     'Sort by',
                     style: GoogleFonts.lato(
@@ -97,13 +97,13 @@ class _ProductListState extends State<ProductList> {
                     Icons.keyboard_arrow_down,
                     color: AppColors.greyText,
                   ),
-                  Gap(15),
+                  const Gap(15),
                   AppIcon(
                     AppIcons.hamburger,
                     size: 20,
                     color: AppColors.greyText,
                   ),
-                  Gap(15),
+                  const Gap(15),
                 ],
               ),
             ),
@@ -133,7 +133,7 @@ class _ProductListState extends State<ProductList> {
                       ],
                     ),
                   ),
-                  Gap(30),
+                  const Gap(30),
                 ],
               ),
             ),
@@ -173,13 +173,13 @@ class _ProductListState extends State<ProductList> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text(
+                  const Text(
                     'Man Stylish Dresses…\n',
                     maxLines: 2,
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 5),
+                    padding: const EdgeInsets.only(left: 5),
                     child: Row(
                       children: [
                         Text(
@@ -191,8 +191,8 @@ class _ProductListState extends State<ProductList> {
                             decoration: TextDecoration.lineThrough,
                           ),
                         ),
-                        Gap(3),
-                        Text(
+                        const Gap(3),
+                        const Text(
                           '\$789',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w700),
@@ -207,14 +207,14 @@ class _ProductListState extends State<ProductList> {
                     direction: Axis.horizontal,
                     allowHalfRating: true,
                     itemCount: 5,
-                    itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                    itemBuilder: (context, _) => Icon(
+                    itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    itemBuilder: (context, _) => const Icon(
                       Icons.star,
                       color: Colors.amber,
                     ),
                     onRatingUpdate: (rating) {},
                   ),
-                  Gap(5),
+                  const Gap(5),
                 ],
               ),
             ),
