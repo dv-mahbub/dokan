@@ -6,7 +6,7 @@ import 'package:dokan/components/global_widget/custom_field.dart';
 import 'package:dokan/components/global_widget/custom_icon.dart';
 import 'package:dokan/main.dart';
 import 'package:dokan/views/auth/login_page.dart';
-import 'package:dokan/views/homepage.dart';
+import 'package:dokan/views/dashboard/homepage.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
