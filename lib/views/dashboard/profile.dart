@@ -84,11 +84,11 @@ class _ProfileState extends State<Profile> {
       decoration: BoxDecoration(
         color: AppColors.whiteBg,
         borderRadius: BorderRadius.circular(10),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
-            color: Color(0xff587721),
+            color: const Color(0xff4d5877).withOpacity(.13),
             blurRadius: 6,
-            offset: Offset(2, 3),
+            offset: const Offset(2, 3),
           ),
         ],
       ),
