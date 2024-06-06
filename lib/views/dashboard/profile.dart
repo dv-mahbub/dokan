@@ -254,6 +254,7 @@ class _ProfileState extends State<Profile> {
     return DottedBorder(
       color: AppColors.primary,
       borderType: BorderType.Circle,
+      dashPattern: const [4, 4],
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ClipOval(
