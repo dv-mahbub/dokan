@@ -1,14 +1,10 @@
-import 'dart:developer';
-
 import 'package:dokan/components/constants/app_colors.dart';
 import 'package:dokan/components/constants/app_icons.dart';
-import 'package:dokan/components/controllers/provider/user_info_provider.dart';
 import 'package:dokan/components/global_widget/custom_icon.dart';
 import 'package:dokan/views/dashboard/product_list.dart';
 import 'package:dokan/views/dashboard/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:provider/provider.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});

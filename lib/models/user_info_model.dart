@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final userInfoModel = userInfoModelFromJson(jsonString);
-
 import 'dart:convert';
 
 UserInfoModel userInfoModelFromJson(String str) =>
@@ -27,8 +23,7 @@ class UserInfoModel {
   Capabilities? capabilities;
   ExtraCapabilities? extraCapabilities;
   Map<String, String>? avatarUrls;
-  Meta? meta;
-  Links? links;
+  dynamic meta;
 
   UserInfoModel({
     this.id,
@@ -49,7 +44,6 @@ class UserInfoModel {
     this.extraCapabilities,
     this.avatarUrls,
     this.meta,
-    this.links,
   });
 
   factory UserInfoModel.fromJson(Map<String, dynamic> json) => UserInfoModel(
@@ -79,8 +73,7 @@ class UserInfoModel {
             : ExtraCapabilities.fromJson(json["extra_capabilities"]),
         avatarUrls: Map.from(json["avatar_urls"]!)
             .map((k, v) => MapEntry<String, String>(k, v)),
-        meta: json["meta"] == null ? null : Meta.fromJson(json["meta"]),
-        links: json["_links"] == null ? null : Links.fromJson(json["_links"]),
+        meta: json["meta"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -102,8 +95,7 @@ class UserInfoModel {
         "extra_capabilities": extraCapabilities?.toJson(),
         "avatar_urls": Map.from(avatarUrls!)
             .map((k, v) => MapEntry<String, dynamic>(k, v)),
-        "meta": meta?.toJson(),
-        "_links": links?.toJson(),
+        "meta": meta,
       };
 }
 
@@ -145,71 +137,5 @@ class ExtraCapabilities {
 
   Map<String, dynamic> toJson() => {
         "subscriber": subscriber,
-      };
-}
-
-class Links {
-  List<Collection>? self;
-  List<Collection>? collection;
-
-  Links({
-    this.self,
-    this.collection,
-  });
-
-  factory Links.fromJson(Map<String, dynamic> json) => Links(
-        self: json["self"] == null
-            ? []
-            : List<Collection>.from(
-                json["self"]!.map((x) => Collection.fromJson(x))),
-        collection: json["collection"] == null
-            ? []
-            : List<Collection>.from(
-                json["collection"]!.map((x) => Collection.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "self": self == null
-            ? []
-            : List<dynamic>.from(self!.map((x) => x.toJson())),
-        "collection": collection == null
-            ? []
-            : List<dynamic>.from(collection!.map((x) => x.toJson())),
-      };
-}
-
-class Collection {
-  String? href;
-
-  Collection({
-    this.href,
-  });
-
-  factory Collection.fromJson(Map<String, dynamic> json) => Collection(
-        href: json["href"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "href": href,
-      };
-}
-
-class Meta {
-  List<dynamic>? persistedPreferences;
-
-  Meta({
-    this.persistedPreferences,
-  });
-
-  factory Meta.fromJson(Map<String, dynamic> json) => Meta(
-        persistedPreferences: json["persisted_preferences"] == null
-            ? []
-            : List<dynamic>.from(json["persisted_preferences"]!.map((x) => x)),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "persisted_preferences": persistedPreferences == null
-            ? []
-            : List<dynamic>.from(persistedPreferences!.map((x) => x)),
       };
 }

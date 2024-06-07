@@ -25,7 +25,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
-
 import '../../components/controllers/api_controllers/api_response_data.dart';
 
 class LoginPage extends StatefulWidget {
@@ -165,6 +164,8 @@ class _LoginPageState extends State<LoginPage> {
         if (mounted) {
           final userProvider =
               Provider.of<UserProvider>(context, listen: false);
+          log('${result.responseBody}');
+
           userProvider.updateUserData(
             UserInfoModel.fromJson(
               jsonDecode(result.responseBody),

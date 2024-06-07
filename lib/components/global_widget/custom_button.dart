@@ -1,6 +1,7 @@
 import 'package:dokan/components/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -47,10 +48,12 @@ class CustomButton extends StatelessWidget {
                 )
               : Text(
                   text,
-                  style: TextStyle(
+                  style: GoogleFonts.lato(
+                    textStyle: TextStyle(
                       color: textColor ?? Colors.white,
                       fontSize: 17,
-                      fontWeight: FontWeight.w700),
+                    ),
+                  ),
                   maxLines: 1,
                   softWrap: true,
                 ),

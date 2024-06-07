@@ -103,7 +103,7 @@ class _ProfileState extends State<Profile> {
                   TokenStore.removeBearerToken();
                   userProvider?.deleteUserData();
                   if (mounted) {
-                    replaceNavigate(context: context, child: LoginPage());
+                    replaceNavigate(context: context, child: const LoginPage());
                   }
                 },
                 width: .88.sw,
@@ -194,7 +194,7 @@ class _ProfileState extends State<Profile> {
                         text: 'Save',
                         onTap: updateProfile,
                         width: .34.sw,
-                        backgroundColor: const Color(0xff1ABC9C),
+                        backgroundColor: AppColors.greenBg,
                       ),
                     ],
                   ),
