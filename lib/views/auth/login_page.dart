@@ -164,8 +164,6 @@ class _LoginPageState extends State<LoginPage> {
         if (mounted) {
           final userProvider =
               Provider.of<UserProvider>(context, listen: false);
-          log('${result.responseBody}');
-
           userProvider.updateUserData(
             UserInfoModel.fromJson(
               jsonDecode(result.responseBody),
