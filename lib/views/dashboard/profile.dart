@@ -45,7 +45,11 @@ class _ProfileState extends State<Profile> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      userProvider = Provider.of<UserProvider>(context, listen: false);
+      if (mounted) {
+        setState(() {
+          userProvider = Provider.of<UserProvider>(context, listen: false);
+        });
+      }
     });
     super.initState();
   }
@@ -258,6 +262,7 @@ class _ProfileState extends State<Profile> {
             );
 
             showSuccessMessage(context, 'Successfully updated', true);
+            setState(() {});
           }
         } else {
           showError(json.decode(result.responseBody)["message"]);
