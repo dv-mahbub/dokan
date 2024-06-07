@@ -1,11 +1,21 @@
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:dokan/components/constants/api_endpoints.dart';
 import 'package:dokan/components/constants/app_colors.dart';
 import 'package:dokan/components/constants/app_icons.dart';
+import 'package:dokan/components/controllers/api_controllers/api_response_data.dart';
+import 'package:dokan/components/controllers/api_controllers/post_api_controller.dart';
 import 'package:dokan/components/global_functions/navigate.dart';
 import 'package:dokan/components/global_widget/custom_button.dart';
 import 'package:dokan/components/global_widget/custom_field.dart';
 import 'package:dokan/components/global_widget/custom_icon.dart';
+import 'package:dokan/components/global_widget/custom_loading.dart';
+import 'package:dokan/components/global_widget/loading.dart';
+import 'package:dokan/components/global_widget/show_message.dart';
 import 'package:dokan/views/auth/login_page.dart';
 import 'package:dokan/views/dashboard/homepage.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -48,22 +58,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
               CustomField(
                 hintText: 'Password',
                 controller: passwordController,
+                obscureText: true,
                 prefixIcon: const AppIcon(AppIcons.password),
               ),
               const Gap(20),
               CustomField(
                 hintText: 'Confirm Password',
+                obscureText: true,
                 controller: confirmPasswordController,
                 prefixIcon: const AppIcon(AppIcons.password),
               ),
               const Gap(45),
-              CustomButton(
-                  text: 'Sign Up',
-                  onTap: () {
-                    if (mounted) {
-                      navigate(context: context, child: const Homepage());
-                    }
-                  }),
+              CustomButton(text: 'Sign Up', onTap: onTapSignUp),
               const Gap(30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -107,6 +113,49 @@ class _RegistrationPageState extends State<RegistrationPage> {
         ),
       ),
     );
+  }
+
+  void onTapSignUp() async {
+    if (nameController.text.isEmpty) {
+      showError('Enter your name');
+    } else if (emailController.text.isEmpty) {
+      showError('Enter email');
+    } else if (!EmailValidator.validate(emailController.text)) {
+      showError('Enter valid email');
+    } else if (passwordController.text.isEmpty) {
+      showError('Enter password');
+    } else if (confirmPasswordController.text.isEmpty) {
+      showError('Enter confirm password');
+    } else if (passwordController.text != confirmPasswordController.text) {
+      showError('Password not matched');
+    } else {
+      try {
+        Map body = {
+          'username': nameController.text,
+          'email': emailController.text,
+          'password': passwordController.text
+        };
+        loadingDialog(context);
+        ApiResponseData result =
+            await postApiController(ApiEndpoints.registration, false, body);
+        if (mounted) {
+          Navigator.pop(context);
+        }
+        if (result.statusCode == 200) {
+          if (mounted) {
+            showSuccessMessage(context, 'Successfully registered');
+            log(result.responseBody);
+            replaceNavigate(context: context, child: const Homepage());
+          }
+        } else {
+          showError(json.decode(result.responseBody)["message"]);
+          log('Registration failed: ${result.statusCode} - ${result.responseBody}');
+        }
+      } catch (e) {
+        log('Registration failed: $e');
+        showError('Failed to register');
+      }
+    }
   }
 
   Widget profilePicture() {
@@ -175,5 +224,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
     passwordController.dispose();
     confirmPasswordController.dispose();
     super.dispose();
+  }
+
+  showError(String message) {
+    if (mounted) {
+      showErrorMessage(context, message);
+    }
   }
 }
