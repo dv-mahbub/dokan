@@ -26,6 +26,7 @@ class _HomepageState extends State<Homepage> {
       floatingActionButton: fab(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: bottomAppBar(),
+      resizeToAvoidBottomInset: false,
     );
   }
 
@@ -104,56 +105,59 @@ class _HomepageState extends State<Homepage> {
   }
 
   Widget fab() {
-    return Container(
-      height: 56,
-      width: 56,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: const LinearGradient(
-          colors: [
-            Color(0xFFFF679B),
-            Color(0xFFFF7B51),
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFFB82D48).withOpacity(0.15),
-            offset: const Offset(0, 12),
-            blurRadius: 28,
+    return FloatingActionButton(
+      isExtended: false,
+      onPressed: () {},
+      backgroundColor: Colors.transparent,
+      child: Container(
+        height: 56,
+        width: 56,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: const LinearGradient(
+            colors: [
+              Color(0xFFFF679B),
+              Color(0xFFFF7B51),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
-        ],
-      ),
-      child: RawMaterialButton(
-        shape: const CircleBorder(),
-        onPressed: () {
-          if (mounted) {
-            setState(
-              () {
-                bodyIndex = 2;
-              },
-            );
-          }
-        },
-        child: AppIcon(
-          AppIcons.search,
-          color: AppColors.whiteText,
-          size: 24,
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFFB82D48).withOpacity(0.15),
+              offset: const Offset(0, 12),
+              blurRadius: 28,
+            ),
+          ],
+        ),
+        child: RawMaterialButton(
+          shape: const CircleBorder(),
+          onPressed: () {
+            if (mounted) {
+              setState(
+                () {
+                  bodyIndex = 2;
+                },
+              );
+            }
+          },
+          child: AppIcon(
+            AppIcons.search,
+            color: AppColors.whiteText,
+            size: 24,
+          ),
         ),
       ),
     );
   }
 
   Widget homeBody(int index) {
-    final data = Provider.of<UserProvider>(context, listen: false);
-    log('$index');
     switch (index) {
       case 0:
         return const ProductList();
       case 1:
-        return Center(
-          child: Text('Dashboard ${data.userData?.userNicename}'),
+        return const Center(
+          child: Text('Dashboard'),
         );
       case 2:
         return const Center(

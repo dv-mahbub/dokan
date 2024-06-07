@@ -1,14 +1,22 @@
 import 'package:dokan/components/constants/app_colors.dart';
 import 'package:dokan/components/constants/app_icons.dart';
 import 'package:dokan/components/constants/app_string.dart';
+import 'package:dokan/components/controllers/provider/user_info_provider.dart';
+import 'package:dokan/components/controllers/shared_preference/token_store.dart';
+import 'package:dokan/components/global_functions/navigate.dart';
 import 'package:dokan/components/global_widget/custom_button.dart';
 import 'package:dokan/components/global_widget/custom_field.dart';
 import 'package:dokan/components/global_widget/custom_icon.dart';
+import 'package:dokan/components/global_widget/show_message.dart';
+import 'package:dokan/models/user_info_model.dart';
+import 'package:dokan/views/auth/login_page.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -24,6 +32,21 @@ class _ProfileState extends State<Profile> {
   TextEditingController streetController = TextEditingController();
   TextEditingController appartmentController = TextEditingController();
   TextEditingController zipCodeController = TextEditingController();
+
+  UserProvider? userProvider;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      userProvider = Provider.of<UserProvider>(context, listen: false);
+      if (mounted) {
+        setState(() {
+          nameController.text = userProvider?.userData?.name ?? '';
+        });
+      }
+    });
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -52,27 +75,33 @@ class _ProfileState extends State<Profile> {
               ),
               const Gap(35),
               profilePicture(),
-              const Gap(40),
+              const Gap(35),
               Text(
-                'Name of the person',
+                userProvider?.userData?.name ?? '',
                 style: GoogleFonts.lato(
                   textStyle: const TextStyle(
                       fontSize: 24, fontWeight: FontWeight.w900),
                 ),
               ),
-              Text(
-                'email@mail.com',
-                style: GoogleFonts.lato(
-                  textStyle:
-                      const TextStyle(fontSize: 15, color: Color(0xff535353)),
-                ),
-              ),
+              // Text(
+              //   userData?.userEmail ?? '',
+              //   style: GoogleFonts.lato(
+              //     textStyle:
+              //         const TextStyle(fontSize: 15, color: Color(0xff535353)),
+              //   ),
+              // ),
               const Gap(40),
               optionsList(),
               const Gap(30),
               CustomButton(
                 text: 'Log Out',
-                onTap: () {},
+                onTap: () {
+                  TokenStore.removeBearerToken();
+                  userProvider?.deleteUserData();
+                  if (mounted) {
+                    replaceNavigate(context: context, child: LoginPage());
+                  }
+                },
                 width: .88.sw,
               ),
               const Gap(35),
@@ -145,7 +174,13 @@ class _ProfileState extends State<Profile> {
                     children: [
                       CustomButton(
                         text: 'Cancel',
-                        onTap: () {},
+                        onTap: () {
+                          if (mounted) {
+                            setState(() {
+                              isExpanded = false;
+                            });
+                          }
+                        },
                         width: .34.sw,
                         textColor: const Color(0xff607374),
                         backgroundColor: Colors.transparent,
@@ -153,7 +188,7 @@ class _ProfileState extends State<Profile> {
                       ),
                       CustomButton(
                         text: 'Save',
-                        onTap: () {},
+                        onTap: updateProfile,
                         width: .34.sw,
                         backgroundColor: const Color(0xff1ABC9C),
                       ),
@@ -180,6 +215,20 @@ class _ProfileState extends State<Profile> {
         ],
       ),
     );
+  }
+
+  void updateProfile() async {
+    FocusScope.of(context).unfocus();
+
+    if (userProvider?.userData?.name == nameController.text &&
+        emailController.text.isEmpty) {
+      if (mounted) {
+        showWarningMessage(context, 'Nothing to update', true);
+        isExpanded = false;
+      }
+    } else if (!EmailValidator.validate(emailController.text)) {
+      showError('Enter valid email');
+    }
   }
 
   Widget inputContainer(
@@ -269,5 +318,11 @@ class _ProfileState extends State<Profile> {
         ),
       ),
     );
+  }
+
+  void showError(String message) {
+    if (mounted) {
+      showErrorMessage(context, message, true);
+    }
   }
 }

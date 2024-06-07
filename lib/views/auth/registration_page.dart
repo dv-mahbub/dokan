@@ -5,6 +5,7 @@ import 'package:dokan/components/constants/api_endpoints.dart';
 import 'package:dokan/components/constants/app_colors.dart';
 import 'package:dokan/components/constants/app_icons.dart';
 import 'package:dokan/components/controllers/api_controllers/api_response_data.dart';
+import 'package:dokan/components/controllers/api_controllers/get_api_controller.dart';
 import 'package:dokan/components/controllers/api_controllers/post_api_controller.dart';
 import 'package:dokan/components/controllers/provider/user_info_provider.dart';
 import 'package:dokan/components/controllers/shared_preference/token_store.dart';
@@ -14,6 +15,7 @@ import 'package:dokan/components/global_widget/custom_field.dart';
 import 'package:dokan/components/global_widget/custom_icon.dart';
 import 'package:dokan/components/global_widget/loading.dart';
 import 'package:dokan/components/global_widget/show_message.dart';
+import 'package:dokan/models/login_response_model.dart';
 import 'package:dokan/models/user_info_model.dart';
 import 'package:dokan/views/auth/login_page.dart';
 import 'package:dokan/views/dashboard/homepage.dart';
@@ -147,7 +149,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         if (result.statusCode == 200) {
           if (mounted) {
             showSuccessMessage(context, 'Successfully registered');
-            loginToGetUserData();
+            loginToGetToken();
           }
         } else {
           showError(json.decode(result.responseBody)["message"]);
@@ -160,7 +162,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     }
   }
 
-  void loginToGetUserData() async {
+  void loginToGetToken() async {
     try {
       Map body = {
         'username': emailController.text,
@@ -174,15 +176,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
       }
       if (result.statusCode == 200) {
         if (mounted) {
-          final userProvider =
-              Provider.of<UserProvider>(context, listen: false);
-          userProvider.updateUserData(
-            UserInfoModel.fromJson(
-              jsonDecode(result.responseBody),
-            ),
-          );
-          TokenStore.setBearerToken(userProvider.userData!.token!);
-          replaceNavigate(context: context, child: const Homepage());
+          final userData =
+              LoginResponseModel.fromJson(jsonDecode(result.responseBody));
+          TokenStore.setBearerToken(userData.token!);
+          getUserDetails();
         }
       } else {
         showError(json.decode(result.responseBody)["message"]);
@@ -191,6 +188,35 @@ class _RegistrationPageState extends State<RegistrationPage> {
     } catch (e) {
       log('Login failed: $e');
       showError('Failed to Login');
+    }
+  }
+
+  void getUserDetails() async {
+    try {
+      loadingDialog(context);
+      ApiResponseData result =
+          await getApiController(ApiEndpoints.getUserData, true);
+      if (mounted) {
+        Navigator.pop(context);
+      }
+      if (result.statusCode == 200) {
+        if (mounted) {
+          final userProvider =
+              Provider.of<UserProvider>(context, listen: false);
+          userProvider.updateUserData(
+            UserInfoModel.fromJson(
+              jsonDecode(result.responseBody),
+            ),
+          );
+          replaceNavigate(context: context, child: const Homepage());
+        }
+      } else {
+        showError(json.decode(result.responseBody)["message"]);
+        log('Failed to fetch user details: ${result.statusCode} - ${result.responseBody}');
+      }
+    } catch (e) {
+      log('Failed - Get details: $e');
+      showError('Failed to fetch user data');
     }
   }
 
