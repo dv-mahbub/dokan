@@ -1,12 +1,19 @@
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:dokan/components/constants/api_endpoints.dart';
 import 'package:dokan/components/constants/app_colors.dart';
 import 'package:dokan/components/constants/app_icons.dart';
 import 'package:dokan/components/constants/app_string.dart';
+import 'package:dokan/components/controllers/api_controllers/api_response_data.dart';
+import 'package:dokan/components/controllers/api_controllers/post_api_controller.dart';
 import 'package:dokan/components/controllers/provider/user_info_provider.dart';
 import 'package:dokan/components/controllers/shared_preference/token_store.dart';
 import 'package:dokan/components/global_functions/navigate.dart';
 import 'package:dokan/components/global_widget/custom_button.dart';
 import 'package:dokan/components/global_widget/custom_field.dart';
 import 'package:dokan/components/global_widget/custom_icon.dart';
+import 'package:dokan/components/global_widget/loading.dart';
 import 'package:dokan/components/global_widget/show_message.dart';
 import 'package:dokan/models/user_info_model.dart';
 import 'package:dokan/views/auth/login_page.dart';
@@ -39,11 +46,6 @@ class _ProfileState extends State<Profile> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       userProvider = Provider.of<UserProvider>(context, listen: false);
-      if (mounted) {
-        setState(() {
-          nameController.text = userProvider?.userData?.name ?? '';
-        });
-      }
     });
     super.initState();
   }
@@ -61,6 +63,8 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    nameController.text = userProvider?.userData?.name ?? '';
+    emailController.text = userProvider?.userData?.email ?? '';
     return SafeArea(
       child: SizedBox(
         width: 1.sw,
@@ -83,13 +87,13 @@ class _ProfileState extends State<Profile> {
                       fontSize: 24, fontWeight: FontWeight.w900),
                 ),
               ),
-              // Text(
-              //   userData?.userEmail ?? '',
-              //   style: GoogleFonts.lato(
-              //     textStyle:
-              //         const TextStyle(fontSize: 15, color: Color(0xff535353)),
-              //   ),
-              // ),
+              Text(
+                userProvider?.userData?.email ?? '',
+                style: GoogleFonts.lato(
+                  textStyle:
+                      const TextStyle(fontSize: 15, color: Color(0xff535353)),
+                ),
+              ),
               const Gap(40),
               optionsList(),
               const Gap(30),
@@ -218,9 +222,10 @@ class _ProfileState extends State<Profile> {
   }
 
   void updateProfile() async {
-    FocusScope.of(context).unfocus();
-
-    if (userProvider?.userData?.name == nameController.text &&
+    FocusManager.instance.primaryFocus?.unfocus();
+    if (emailController.text.isEmpty) {
+      showError('Enter email');
+    } else if (userProvider?.userData?.name == nameController.text &&
         emailController.text.isEmpty) {
       if (mounted) {
         showWarningMessage(context, 'Nothing to update', true);
@@ -228,6 +233,40 @@ class _ProfileState extends State<Profile> {
       }
     } else if (!EmailValidator.validate(emailController.text)) {
       showError('Enter valid email');
+    } else {
+      Map<String, String> body = {
+        'name': nameController.text,
+        'email': emailController.text
+      };
+
+      try {
+        loadingDialog(context);
+        ApiResponseData result = await postApiController(
+            '${ApiEndpoints.updateProfile}/${userProvider?.userData?.id}',
+            true,
+            body);
+        if (mounted) {
+          Navigator.pop(context);
+          FocusManager.instance.primaryFocus?.unfocus();
+        }
+        if (result.statusCode == 200) {
+          if (mounted) {
+            userProvider?.updateUserData(
+              UserInfoModel.fromJson(
+                jsonDecode(result.responseBody),
+              ),
+            );
+
+            showSuccessMessage(context, 'Successfully updated', true);
+          }
+        } else {
+          showError(json.decode(result.responseBody)["message"]);
+          log('Failed to update: ${result.statusCode} - ${result.responseBody}');
+        }
+      } catch (e) {
+        log('Failed to update: $e');
+        showError('Failed to update');
+      }
     }
   }
 
