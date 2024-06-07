@@ -10,7 +10,6 @@ import 'package:dokan/components/global_functions/navigate.dart';
 import 'package:dokan/components/global_widget/custom_button.dart';
 import 'package:dokan/components/global_widget/custom_field.dart';
 import 'package:dokan/components/global_widget/custom_icon.dart';
-import 'package:dokan/components/global_widget/custom_loading.dart';
 import 'package:dokan/components/global_widget/loading.dart';
 import 'package:dokan/components/global_widget/show_message.dart';
 import 'package:dokan/views/auth/login_page.dart';
